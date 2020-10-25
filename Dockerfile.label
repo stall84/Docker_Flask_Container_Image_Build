@@ -1,0 +1,4 @@
+FROM python
+LABEL maintainer=stall84@gmail.com
+LABEL com.tallac.version="0.7"
+LABEL com.tallac.production="true"

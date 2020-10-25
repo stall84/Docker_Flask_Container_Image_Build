@@ -1,0 +1,4 @@
+FROM python
+RUN groupadd mysql && useradd -g mysql mysql
+USER mysql
+RUN id
