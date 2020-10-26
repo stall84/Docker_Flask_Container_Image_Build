@@ -2,3 +2,11 @@ FROM file
 COPY configs/blue_circle.ini /app/default.ini
 RUN apt update && apt install -y crudini
 RUN crudini --set default.ini DEFAULT shape line
+
+# Using this method of reusable-image modification We are inheriting from 
+# parent 'file' base image (This was created originally from Dockerfile.file)
+# Everything from 'file' image will be copied over (python base, default.ini ... etc)
+# But in line 2 here we are replacing default.ini with blue_circle 
+# (will still be named default.ini, but with blue's config data)
+# Last lines download Crudini (for modifying .ini files) and further modifies/customizes
+# this particular 'child' build by editing the default shape type.

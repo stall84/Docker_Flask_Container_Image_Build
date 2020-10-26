@@ -5,12 +5,17 @@ import os
 shape = ""
 color = ""
 
+# Below, argparse module is writing 'listeners' for the arguments following the call of this (config-reader.py) module.
+# ex:  python config-reader.py --file     << This will be run off the entrypoint and cmd variables in build image
+# and in --file case will be run by 2nd if block
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser(description='Config reader example.')
     arg_parser.add_argument('--color', nargs=1, help='set the color value')
     arg_parser.add_argument('--shape', nargs=1, help='set the shape value')
-    arg_parser.add_argument('--file', nargs=1, help='read the configuration from file_name')
-    arg_parser.add_argument('--env', action='store_true', help='read the configuration from Environment Variables CONFIG_COLOR and CONFIG_SHAPE')
+    arg_parser.add_argument(
+        '--file', nargs=1, help='read the configuration from file_name')
+    arg_parser.add_argument('--env', action='store_true',
+                            help='read the configuration from Environment Variables CONFIG_COLOR and CONFIG_SHAPE')
     arguments = arg_parser.parse_args()
 
     if arguments.env:
@@ -30,9 +35,9 @@ if __name__ == "__main__":
         filename = arguments.file[0]
         print('Reading configuration from Config File ', filename)
         try:
-            config_file = open(filename,"r")
+            config_file = open(filename, "r")
         except:
-            print('Error opening Config File ',filename)
+            print('Error opening Config File ', filename)
         else:
             config = configparser.ConfigParser()
             try:
@@ -46,7 +51,8 @@ if __name__ == "__main__":
                     print('"color" = ', color)
                     print('"shape" = ', shape)
                 else:
-                    print('Missing [DEFAULT] section. No Config read from file')
+                    print(
+                        'Missing [DEFAULT] section. No Config read from file')
 
     if arguments.color:
         color = arguments.color[0]
@@ -61,4 +67,5 @@ if __name__ == "__main__":
         arg_parser.print_help(file=None)
         exit(1)
     else:
-        print('Final configuration is: "color" = ', color, ', "shape" = ',shape)
+        print('Final configuration is: "color" = ',
+              color, ', "shape" = ', shape)
