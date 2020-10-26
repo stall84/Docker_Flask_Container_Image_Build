@@ -1,0 +1,4 @@
+FROM python
+ENTRYPOINT ["python"]
+CMD ["-c", "print('Hello World')"]
+
