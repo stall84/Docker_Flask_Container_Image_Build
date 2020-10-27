@@ -1,1 +1,5 @@
-Django==2.2.1
+Django==${DJANGO_VER}
+
+# PIP now allows environment variable expansion. This will provide 
+# Versioning at runtime ex: docker run whatever -e DJANGO_VER=3.0.1 
+ 
